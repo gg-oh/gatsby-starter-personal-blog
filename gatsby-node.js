@@ -6,8 +6,10 @@ const path = require("path");
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const { store } = require(`./node_modules/gatsby/dist/redux`);
 
-exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators;
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNode, createNodeField } = actions;
+  
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode, basePath: `pages` });
     const separtorIndex = ~slug.indexOf("--") ? slug.indexOf("--") : 0;
@@ -25,8 +27,8 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   }
 };
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
     const postTemplate = path.resolve("./src/templates/PostTemplate.js");
@@ -72,28 +74,21 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   switch (stage) {
     case "build-javascript":
       {
         let components = store.getState().pages.map(page => page.componentChunkName);
         components = _.uniq(components);
-        config.plugin("CommonsChunkPlugin", webpack.optimize.CommonsChunkPlugin, [
-          {
-            name: `commons`,
-            chunks: [`app`, ...components],
-            minChunks: (module, count) => {
-              const vendorModuleList = []; // [`material-ui`, `lodash`];
-              const isFramework = _.some(
-                vendorModuleList.map(vendor => {
-                  const regex = new RegExp(`[\\\\/]node_modules[\\\\/]${vendor}[\\\\/].*`, `i`);
-                  return regex.test(module.resource);
-                })
-              );
-              return isFramework || count > 1;
+        actions.setWebpackConfig({
+          optimization: {
+            splitChunks: {
+              name: `commons`,
+              chunks: [`app`, ...components],
+              minChunks: 1,
             }
           }
-        ]);
+        });
         // config.plugin("BundleAnalyzerPlugin", BundleAnalyzerPlugin, [
         //   {
         //     analyzerMode: "static",
@@ -106,12 +101,13 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       }
       break;
   }
-  return config;
 };
 
-exports.modifyBabelrc = ({ babelrc }) => {
-  return {
-    ...babelrc,
-    plugins: babelrc.plugins.concat([`syntax-dynamic-import`, `dynamic-import-webpack`])
-  };
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPreset({
+    name: `@babel/preset-env`,
+  });
+  actions.setBabelPreset({
+    name: `@babel/preset-react`,
+  });
 };

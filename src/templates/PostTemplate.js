@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Main from "../components/Main/";
 import { connect } from "react-redux";
-require("core-js/fn/array/find");
+import { graphql } from "graphql";
+
+import 'core-js/actual/array/find';
 require("prismjs/themes/prism-okaidia.css");
 
+import Main from "../components/Main/";
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
 import Post from "../components/Post/";

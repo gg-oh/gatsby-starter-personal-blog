@@ -1,8 +1,8 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 import Color from "color";
 import colors from "./colors";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   base: {
     colors: {
       background: colors.background,

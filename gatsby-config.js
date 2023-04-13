@@ -46,7 +46,6 @@ module.exports = {
     }
   },
   plugins: [
-    `gatsby-plugin-react-next`,
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
@@ -155,12 +154,12 @@ module.exports = {
       }
     },
     `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_ID
-      }
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     trackingId: process.env.GOOGLE_ANALYTICS_ID
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -211,7 +210,8 @@ module.exports = {
                 }
               }
             `,
-            output: "/rss.xml"
+            output: "/rss.xml",
+            title: "Your Site's RSS Feed",
           }
         ]
       }

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === `production`) {
   }
 }
 
-module.exports = class HTML extends React.Component {
+const Item = class HTML extends React.Component {
   render() {
     let css;
     if (process.env.NODE_ENV === `production`) {
@@ -50,3 +50,5 @@ module.exports = class HTML extends React.Component {
     );
   }
 };
+
+export default Item;
