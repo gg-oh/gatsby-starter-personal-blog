@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { Link } from "gatsby";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   link: {
     padding: ".5em 0 1em 1em",
     position: "relative",

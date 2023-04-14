@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import Link from "gatsby-link";
-import IconButton from "@material-ui/core/IconButton";
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { IconButton } from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
 
 import avatar from "../../images/jpg/avatar.jpg";
 import config from "../../../content/meta/config";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   header: {
     lineHeight: 1,
     position: "relative"
@@ -126,7 +128,7 @@ const InfoHeader = props => {
         onClick={expandOnClick}
         title="Expand the box"
       >
-        <ExpandMoreIcon />
+        <ExpandMore />
       </IconButton>
     </header>
   );

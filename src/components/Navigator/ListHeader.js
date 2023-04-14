@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton } from "@mui/material";
+import { Close, ExpandLess } from "@mui/icons-material";
 
-import CloseIcon from "@material-ui/icons/Close";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import theme from "../../styles/theme";
 
-const styles = theme => ({
+const styles = () => ({
   closed: {
     display: "none",
     ".is-aside.closed &, .moving-featured.closed &": {
@@ -41,9 +41,7 @@ const styles = theme => ({
     color: theme.navigator.colors.postsHeader
   },
   filter: {
-    margin: `0 calc(-.5rem + ${theme.base.sizes.linesMargin}) 1em calc(-.5rem + ${
-      theme.base.sizes.linesMargin
-    })`,
+    margin: `0 calc(-.5rem + ${theme.base.sizes.linesMargin}) 1em calc(-.5rem + ${theme.base.sizes.linesMargin})`,
     position: "relative",
     fontSize: "1.2em",
     lineHeight: 1,
@@ -64,9 +62,7 @@ const styles = theme => ({
       padding: "0 1em 1.5em",
       ".is-aside &": {
         padding: "0 0 1em .5em",
-        margin: `0 calc(-.5rem + ${theme.base.sizes.linesMargin}) 1em calc(-.5rem + ${
-          theme.base.sizes.linesMargin
-        })`
+        margin: `0 calc(-.5rem + ${theme.base.sizes.linesMargin}) 1em calc(-.5rem + ${theme.base.sizes.linesMargin})`
       }
     }
   },
@@ -91,24 +87,23 @@ const ListHeader = props => {
             onClick={expandOnClick}
             title="Expand the list"
           >
-            <ExpandLessIcon />
+            <ExpandLess />
           </IconButton>
         </div>
       )}
-      {navigatorShape === "open" &&
-        categoryFilter !== "all posts" && (
-          <div className={classes.filter}>
-            <small>Active category filter:</small> <strong>{categoryFilter}</strong>
-            <IconButton
-              aria-label="Remove filtering"
-              className={classes.clear}
-              onClick={removeFilter}
-              title="Clear filtering"
-            >
-              <CloseIcon />
-            </IconButton>
-          </div>
-        )}
+      {navigatorShape === "open" && categoryFilter !== "all posts" && (
+        <div className={classes.filter}>
+          <small>Active category filter:</small> <strong>{categoryFilter}</strong>
+          <IconButton
+            aria-label="Remove filtering"
+            className={classes.clear}
+            onClick={removeFilter}
+            title="Clear filtering"
+          >
+            <Close />
+          </IconButton>
+        </div>
+      )}
     </header>
   );
 };

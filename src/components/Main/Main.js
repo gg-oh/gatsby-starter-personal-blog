@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import SpringScrollbars from "../SpringScrollbars";
+import theme from "../../styles/theme";
 
-const styles = theme => ({
+const styles = () => ({
   main: {
     position: "absolute",
     top: 0,

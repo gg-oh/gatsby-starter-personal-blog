@@ -1,18 +1,16 @@
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import Paper from '@material-ui/core/Paper';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import classNames from 'classnames';
-import Link from 'gatsby-link';
-import PropTypes from 'prop-types';
-import React from 'react';
-import injectSheet from 'react-jss';
-import {Manager, Popper, Target} from 'react-popper';
+import { ClickAwayListener } from "@mui/base";
+import { Grow, IconButton, MenuItem, MenuList, Paper } from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
+import classNames from "classnames";
+import Link from "gatsby-link";
+import PropTypes from "prop-types";
+import React from "react";
+import injectSheet from "react-jss";
+import { Manager, Popper, Target } from "react-popper";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   topMenu: {
     float: "right",
     margin: "5px 10px 0 0",
@@ -65,7 +63,7 @@ class TopMenu extends React.Component {
               onClick={this.handleClick}
               className={classes.open}
             >
-              <MoreVertIcon />
+              <MoreVert />
             </IconButton>
           </Target>
           <Popper

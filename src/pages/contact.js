@@ -10,7 +10,7 @@ import Content from "../components/Main/Content";
 import Form from "../components/ContactForm";
 import config from "../../content/meta/config";
 
-const styles = theme => ({});
+const styles = () => ({});
 
 const Contact = () => {
   return (

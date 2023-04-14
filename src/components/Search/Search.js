@@ -5,7 +5,9 @@ import { InstantSearch, SearchBox, Hits, Stats, Pagination } from "react-instant
 
 import Hit from "./Hit";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   search: {
     marginTop: "-1em",
     "& .ais-SearchBox": {
@@ -82,19 +84,18 @@ const Search = props => {
 
   return (
     <div className={classes.search}>
-      {algolia &&
-        algolia.appId && (
-          <InstantSearch
-            appId={algolia.appId}
-            apiKey={algolia.searchOnlyApiKey}
-            indexName={algolia.indexName}
-          >
-            <SearchBox translations={{ placeholder: "Search" }} />
-            <Stats />
-            <Hits hitComponent={Hit} />
-            <Pagination />
-          </InstantSearch>
-        )}
+      {algolia && algolia.appId && (
+        <InstantSearch
+          appId={algolia.appId}
+          apiKey={algolia.searchOnlyApiKey}
+          indexName={algolia.indexName}
+        >
+          <SearchBox translations={{ placeholder: "Search" }} />
+          <Stats />
+          <Hits hitComponent={Hit} />
+          <Pagination />
+        </InstantSearch>
+      )}
     </div>
   );
 };

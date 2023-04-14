@@ -2,7 +2,7 @@ require("dotenv").config();
 const config = require("./content/meta/config");
 
 const query = `{
-  allMarkdownRemark(filter: { id: { regex: "//posts|pages//" } }) {
+  allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/posts|pages/" } }) {
     edges {
       node {
         objectID: id
@@ -192,7 +192,7 @@ module.exports = {
                 allMarkdownRemark(
                   limit: 1000,
                   sort: { order: DESC, fields: [fields___prefix] },
-                  filter: { id: { regex: "//posts//" } }
+                  filter: { fileAbsolutePath: { regex: "/posts/" } }
                 ) {
                   edges {
                     node {
@@ -211,7 +211,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed",
+            title: "Your Site's RSS Feed"
           }
         ]
       }

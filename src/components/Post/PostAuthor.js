@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import Avatar from "@material-ui/core/Avatar";
+import { Avatar } from "@mui/material";
 
 import config from "../../../content/meta/config";
 import avatar from "../../images/jpg/avatar.jpg";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   author: {
     margin: "3em 0 0",
     padding: "3em 0 0",

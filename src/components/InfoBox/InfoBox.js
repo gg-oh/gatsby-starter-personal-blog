@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { connect } from "react-redux";
-import 'core-js/actual/array/find';
+import "core-js/actual/array/find";
 
 import SocialIcons from "./SocialIcons";
 import InfoMenu from "./InfoMenu";
@@ -13,7 +13,9 @@ import StackIcons from "./StackIcons";
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 import { setNavigatorPosition, setNavigatorShape } from "../../state/store";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   infoBox: {
     display: "none",
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {

@@ -8,7 +8,9 @@ import GithubIcon from "!svg-react-loader!../../images/svg-icons/github.svg?name
 import FacebookIcon from "!svg-react-loader!../../images/svg-icons/facebook.svg?name=FacebookIcon";
 import TwitterIcon from "!svg-react-loader!../../images/svg-icons/twitter.svg?name=TwitterIcon";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   social: {
     display: "flex",
     justifyContent: "center",

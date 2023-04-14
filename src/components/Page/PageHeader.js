@@ -4,7 +4,9 @@ import injectSheet from "react-jss";
 
 import AlgoliaIcon from "!svg-react-loader!../../images/svg-icons/algolia-full.svg?name=AlgoliaIcon";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   header: {
     margin: "0 0 3em",
     display: "flex",

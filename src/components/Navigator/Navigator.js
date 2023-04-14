@@ -8,7 +8,9 @@ import { setNavigatorPosition, setNavigatorShape, setCategoryFilter } from "../.
 import { moveNavigatorAside } from "./../../utils/shared";
 import List from "./List";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   navigator: {
     transform: "translate3d(0, 0, 0)",
     willChange: "left, top, bottom, width",

@@ -11,7 +11,9 @@ function encode(data) {
     .join("&");
 }
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   submit: {
     margin: "3em 0"
     //width: "100%"

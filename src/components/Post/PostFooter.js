@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import 'core-js/actual/array/find';
+import "core-js/actual/array/find";
 
 import asyncComponent from "../common/AsyncComponent/";
 import PostAuthor from "./PostAuthor";
 import PostComments from "./PostComments";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   footer: {
     color: theme.main.colors.footer,
     fontSize: `${theme.main.fonts.footer.size}em`,

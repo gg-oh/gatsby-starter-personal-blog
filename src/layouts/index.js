@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { graphql } from "graphql";
+import { graphql } from "gatsby";
 
 import withRoot from "../withRoot";
 
@@ -33,18 +33,17 @@ const InfoBox = asyncComponent(
   />
 );
 
-class Layout extends React.Component {
-  timeouts = {};
+const Layout = props => {
+  timouts = {};
   categories = [];
 
-  componentDidMount() {
-    this.props.setIsWideScreen(isWideScreen());
+  //DidMount
+  useEffect(() => {
+    props.setIsWideScreen(isWideScreen());
     if (typeof window !== "undefined") {
       window.addEventListener("resize", this.resizeThrottler, false);
     }
-  }
 
-  componentWillMount() {
     if (typeof localStorage !== "undefined") {
       const inLocal = +localStorage.getItem("font-size-increase");
 
@@ -56,7 +55,7 @@ class Layout extends React.Component {
     }
 
     this.getCategories();
-  }
+  });
 
   getCategories = () => {
     this.categories = this.props.data.posts.edges.reduce((list, edge, i) => {
@@ -77,21 +76,86 @@ class Layout extends React.Component {
     this.props.setIsWideScreen(isWideScreen());
   };
 
-  render() {
-    const { children, data } = this.props;
+  const { children, data } = props;
 
-    // TODO: dynamic management of tabindexes for keybord navigation
-    return (
-      <LayoutWrapper>
-        {children()}
-        <Navigator posts={data.posts.edges} />
-        <ActionsBar categories={this.categories} />
-        <InfoBar pages={data.pages.edges} parts={data.parts.edges} />
-        {this.props.isWideScreen && <InfoBox pages={data.pages.edges} parts={data.parts.edges} />}
-      </LayoutWrapper>
-    );
-  }
-}
+  // TODO: dynamic management of tabindexes for keybord navigation
+  return (
+    <LayoutWrapper>
+      {children()}
+      <Navigator posts={data.posts.edges} />
+      <ActionsBar categories={this.categories} />
+      <InfoBar pages={data.pages.edges} parts={data.parts.edges} />
+      {this.props.isWideScreen && <InfoBox pages={data.pages.edges} parts={data.parts.edges} />}
+    </LayoutWrapper>
+  );
+};
+
+// class Layout extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   timeouts = {};
+//   categories = [];
+
+//   componentDidMount() {
+//     this.props.setIsWideScreen(isWideScreen());
+//     if (typeof window !== "undefined") {
+//       window.addEventListener("resize", this.resizeThrottler, false);
+//     }
+//   }
+
+//   componentWillMount() {
+//     console.log(this.props);
+//     if (typeof localStorage !== "undefined") {
+//       const inLocal = +localStorage.getItem("font-size-increase");
+
+//       const inStore = this.props.fontSizeIncrease;
+
+//       if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
+//         this.props.setFontSizeIncrease(inLocal);
+//       }
+//     }
+
+//     this.getCategories();
+//   }
+
+//   getCategories = () => {
+//     this.categories = this.props.data.posts.edges.reduce((list, edge, i) => {
+//       const category = edge.node.frontmatter.category;
+//       if (category && !~list.indexOf(category)) {
+//         return list.concat(edge.node.frontmatter.category);
+//       } else {
+//         return list;
+//       }
+//     }, []);
+//   };
+
+//   resizeThrottler = () => {
+//     return timeoutThrottlerHandler(this.timeouts, "resize", 500, this.resizeHandler);
+//   };
+
+//   resizeHandler = () => {
+//     this.props.setIsWideScreen(isWideScreen());
+//   };
+
+//   render() {
+//     const { children, data } = this.props;
+
+//     console.log(this.props);
+
+//     // TODO: dynamic management of tabindexes for keybord navigation
+//     return (
+//       <LayoutWrapper>
+//         {children()}
+//         <Navigator posts={data.posts.edges} />
+//         <ActionsBar categories={this.categories} />
+//         <InfoBar pages={data.pages.edges} parts={data.parts.edges} />
+//         {this.props.isWideScreen && <InfoBox pages={data.pages.edges} parts={data.parts.edges} />}
+//       </LayoutWrapper>
+//     );
+//   }
+// }
 
 Layout.propTypes = {
   data: PropTypes.object.isRequired,
@@ -115,16 +179,13 @@ const mapDispatchToProps = {
   setFontSizeIncrease
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(injectSheet(globals)(Layout)));
+export default connect(mapStateToProps, mapDispatchToProps)(withRoot(injectSheet(globals)(Layout)));
 
 //eslint-disable-next-line no-undef
 export const guery = graphql`
   query LayoutQuery {
     posts: allMarkdownRemark(
-      filter: { id: { regex: "//posts//" } }
+      filter: { fileAbsolutePath: { regex: "/posts|pages/" } }
       sort: { fields: [fields___prefix], order: DESC }
     ) {
       edges {
@@ -141,8 +202,8 @@ export const guery = graphql`
             cover {
               children {
                 ... on ImageSharp {
-                  resolutions(width: 90, height: 90) {
-                    ...GatsbyImageSharpResolutions_withWebp_noBase64
+                  fluid(fit: COVER) {
+                    ... GatsbyImageSharpFluid_withWebp_noBase64
                   }
                 }
               }
@@ -152,7 +213,7 @@ export const guery = graphql`
       }
     }
     pages: allMarkdownRemark(
-      filter: { id: { regex: "//pages//" }, fields: { prefix: { regex: "/^\\d+$/" } } }
+      filter: { fileAbsolutePath: { regex: "/pages/" }, fields: { prefix: { regex: "/^\\d+$/" } } }
       sort: { fields: [fields___prefix], order: ASC }
     ) {
       edges {
@@ -168,7 +229,7 @@ export const guery = graphql`
         }
       }
     }
-    parts: allMarkdownRemark(filter: { id: { regex: "//parts//" } }) {
+    parts: allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/parts/" } }) {
       edges {
         node {
           html

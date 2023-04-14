@@ -4,7 +4,9 @@ import injectSheet from "react-jss";
 
 import Footnote from "./Footnote";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   footer: {
     color: theme.main.colors.footer,
     padding: `1.5rem 1.5rem  calc(${theme.bars.sizes.actionsBar}px + 1.5rem) 1.5rem`,
@@ -22,13 +24,9 @@ const styles = theme => ({
 
 const Footer = props => {
   const { classes, footnote } = props;
-  const { html } = footnote;
+  console.log(props);
 
-  return (
-    <footer className={classes.footer}>
-      <Footnote content={html} />
-    </footer>
-  );
+  return <footer className={classes.footer}>{/* <Footnote content={html} /> */}</footer>;
 };
 
 Footer.propTypes = {

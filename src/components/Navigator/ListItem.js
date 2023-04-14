@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import LazyLoad from "react-lazyload";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   listItem: {
     margin: "0 0 .7em 0",
     transition: "height 1s",
@@ -149,22 +151,21 @@ class ListItem extends React.Component {
           to={post.node.fields.slug}
           onClick={linkOnClick}
         >
-          {post.node.frontmatter.cover &&
-            post.node.frontmatter.cover.children[0] && (
-              <div className={`${classes.listItemPointer} pointer`}>
-                <LazyLoad height={60} overflow={true} throttle={300} once={true} offset={100}>
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSetWebp}
-                    />
-                    <source srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSet} />
-                    <img src={post.node.frontmatter.cover.children[0].resolutions.src} alt="" />
-                  </picture>
-                </LazyLoad>
-              </div>
-            )}
-          
+          {post.node.frontmatter.cover && post.node.frontmatter.cover.children[0] && (
+            <div className={`${classes.listItemPointer} pointer`}>
+              <LazyLoad height={60} overflow={true} throttle={300} once={true} offset={100}>
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSetWebp}
+                  />
+                  <source srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSet} />
+                  <img src={post.node.frontmatter.cover.children[0].resolutions.src} alt="" />
+                </picture>
+              </LazyLoad>
+            </div>
+          )}
+
           <div className={classes.listItemText}>
             <h1>{post.node.frontmatter.title}</h1>
             {post.node.frontmatter.subTitle && <h2>{post.node.frontmatter.subTitle}</h2>}

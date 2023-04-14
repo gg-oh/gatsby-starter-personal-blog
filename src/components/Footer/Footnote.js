@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   container: {
     fontSize: `${theme.footer.fonts.footnote.size}em`,
     lineHeight: theme.footer.fonts.footnote.lineHeight,

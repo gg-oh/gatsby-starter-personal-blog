@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   text: {
     display: "block",
     fontWeight: 300,

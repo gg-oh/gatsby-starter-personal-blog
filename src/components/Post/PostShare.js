@@ -17,7 +17,9 @@ import {
 
 import config from "../../../content/meta/config";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   share: {
     display: "flex",
     flexDirection: "column",

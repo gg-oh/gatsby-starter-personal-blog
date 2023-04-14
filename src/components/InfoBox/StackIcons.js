@@ -13,7 +13,9 @@ import WebpackIcon from "!svg-react-loader!../../images/svg-icons/webpack.svg?na
 import BabelIcon from "!svg-react-loader!../../images/svg-icons/babel.svg?name=BabelIcon";
 import NetlifyIcon from "!svg-react-loader!../../images/svg-icons/netlify.svg?name=NetlifyIcon";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   stack: {
     display: "none",
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {

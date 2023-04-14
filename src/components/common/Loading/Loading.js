@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { CircularProgress } from "@mui/material";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   loading: {
     display: "flex",
     background: props =>

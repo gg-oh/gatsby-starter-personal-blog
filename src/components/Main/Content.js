@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 
 import { setFontSizeIncrease } from "../../state/store";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   content: {
     color: theme.main.colors.content,
     fontSize: props => `calc(${theme.main.fonts.content.size}em * ${props.fontSizeIncrease})`,
@@ -112,7 +114,4 @@ const mapDispatchToProps = {
   setFontSizeIncrease
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(Content));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Content));

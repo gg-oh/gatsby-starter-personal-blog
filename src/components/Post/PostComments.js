@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import FacebookProvider, { Comments } from "react-facebook";
-import 'core-js/actual/array/find';
+import "core-js/actual/array/find";
 
 import config from "../../../content/meta/config";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   postComments: {
     margin: "3em 0 0",
     padding: "3em 0 0",

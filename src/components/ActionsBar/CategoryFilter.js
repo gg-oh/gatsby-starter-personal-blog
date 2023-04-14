@@ -1,17 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import IconButton from "@material-ui/core/IconButton";
-import { Manager, Target, Popper } from "react-popper";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import classNames from "classnames";
-import FilterListIcon from "@material-ui/icons/FilterList";
 
-const styles = theme => ({
+import { ClickAwayListener } from "@mui/base";
+import { MenuItem, MenuList, IconButton, Grow, Paper, FilterListIcon } from "@mui/material";
+
+import { Manager, Target, Popper } from "react-popper";
+import classNames from "classnames";
+
+import theme from "../../styles/theme";
+
+const styles = () => ({
   fontSizeSetter: {
     [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {}
   },

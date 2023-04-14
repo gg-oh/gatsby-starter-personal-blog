@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { graphql } from "graphql";
+import { graphql } from "gatsby";
 
-import 'core-js/actual/array/find';
+import "core-js/actual/array/find";
 require("prismjs/themes/prism-okaidia.css");
 
 import Main from "../components/Main/";

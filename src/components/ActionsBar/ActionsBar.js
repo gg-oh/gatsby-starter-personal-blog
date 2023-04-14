@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton } from "@mui/material";
 
 import Link from "gatsby-link";
 import { connect } from "react-redux";
@@ -24,7 +24,9 @@ import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   actionsBar: {
     position: "absolute",
     background: theme.bars.colors.background,
@@ -200,7 +202,4 @@ const mapDispatchToProps = {
   setCategoryFilter
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(ActionsBar));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(ActionsBar));

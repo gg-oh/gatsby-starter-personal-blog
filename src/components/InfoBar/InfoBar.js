@@ -1,7 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
+import { Avatar } from "@mui/material";
 import Link from "gatsby-link";
 import { connect } from "react-redux";
 
@@ -12,7 +12,9 @@ import config from "../../../content/meta/config";
 import avatar from "../../images/jpg/avatar.jpg";
 import TopMenu from "./TopMenu";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   infoBar: {
     position: "absolute",
     background: theme.bars.colors.background,
@@ -98,7 +100,4 @@ const mapDispatchToProps = {
   setNavigatorPosition
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(InfoBar));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(InfoBar));

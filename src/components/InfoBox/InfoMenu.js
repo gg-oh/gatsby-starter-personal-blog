@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import Link from "gatsby-link";
 
-const styles = theme => ({
+import theme from "../../styles/theme";
+
+const styles = () => ({
   infoMenu: {
     display: "flex",
     flexDirection: "column",
@@ -47,7 +49,7 @@ const InfoMenu = props => {
       </Link>
     </nav>
   );
-};
+});
 
 InfoMenu.propTypes = {
   pages: PropTypes.array.isRequired,
